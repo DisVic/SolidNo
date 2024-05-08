@@ -11,16 +11,16 @@ const { error } = require("console");
 app.use(express.json());
 app.use(cors());
 
-//Database connection with MongoDB
+//Соединение с СУБД MongoDB
 mongoose.connect("mongodb+srv://FrontendBoy:V1ctoryAppearance@cluster0.f0fbw0f.mongodb.net/web-site");
 
 //API creation
 
 app.get("/",(req,res)=>{
-    res.send("Express app is running")
+    res.send("Express запущен (сервер)")
 })
 
-//Image storage engine
+//Хранилище изображений на диске
 const storage=multer.diskStorage({
     destination: './upload/images',
     filename:(req,file,cb)=>{
@@ -30,7 +30,7 @@ const storage=multer.diskStorage({
 
 const upload = multer({storage:storage})
 
-//Creating upload end point for images
+//Создание конечной точки для загрузки изображений
 app.use('/images',express.static('upload/images'))
 
 app.post("/upload",upload.single('product'),(req,res)=>{
@@ -40,7 +40,7 @@ app.post("/upload",upload.single('product'),(req,res)=>{
     })
 })
 
-//Schema for creating products
+//Сущность для продукта для БД
 
 const Product = mongoose.model("Product",{
     id:{
@@ -76,7 +76,6 @@ const Product = mongoose.model("Product",{
         default:true,
     },
 })
-
 app.post('/addproduct',async (req,res)=>{
     let products = await Product.find({});
     let id;
@@ -98,14 +97,14 @@ app.post('/addproduct',async (req,res)=>{
     });
     console.log(product);
     await product.save();
-    console.log("Saved");
+    console.log("Сохранено");
     res.json({
         success:true,
         name:req.body.name,
     })
 })
 
-//Creating API for deleting products
+//Создание API для удаления товара из списка доступных
 app.post('/removeproduct',async (req,res)=>{
     await Product.findOneAndDelete({id:req.body.id});
     console.log("Removed");
@@ -115,15 +114,14 @@ app.post('/removeproduct',async (req,res)=>{
     })
 })
 
-//Creating API for getting all products
+//Создание API для получения всех товаров
 app.get('/allproducts',async (req,res)=>{
     let products = await Product.find({});
-    console.log("All products fetched");
+    console.log("Все товары извлечены");
     res.send(products);
 })
 
-//Schema creating for User model
-
+//Сущность для пользователя
 const Users = mongoose.model('Users',{
     name:{
         type:String,
@@ -144,12 +142,12 @@ const Users = mongoose.model('Users',{
     }
 })
 
-//Creating Endpoint for registring the user
+//Создание конечной точки для регистрации пользователя
 app.post('/signup', async (req,res)=>{
 
     let check = await Users.findOne({email:req.body.email});
     if(check){
-        return res.status(400).json({success:false,errors:"Existing user found with same email"})
+        return res.status(400).json({success:false,errors:"Пользователь с таким email уже существует"})
     }
     let cart = {};
     for (let index = 0; index < 300; index++) {
@@ -174,7 +172,7 @@ app.post('/signup', async (req,res)=>{
     res.json({success:true,token})
 })
 
-//Creating endpoint for user login
+//Создание конечной точки для входа в профиль пользователя
 app.post('/login',async (req,res)=>{
     let user = await Users.findOne({email:req.body.email});
     if(user){
@@ -189,35 +187,35 @@ app.post('/login',async (req,res)=>{
             res.json({success:true,token});
         }
         else{
-            res.json({success:false,errors:"Wrong password!"});
+            res.json({success:false,errors:"Неверный пароль!"});
         }
     }
     else{
-        res.json({success:false,errors:"Wrong email!"})
+        res.json({success:false,errors:"Неверный email!"})
     }
 })
 
-//Creating endpoint for newcollection data
+//Создание конечной точки для создания новой коллекции товаров
 app.get('/newcollections',async (req,res)=>{
     let products = await Product.find({});
     let newcollection = products.slice(1).slice(-8);
-    console.log("NewCollection fetched!");
+    console.log("Новая коллекция извлечена!");
     res.send(newcollection);
 })
 
-//Creating popular in women section
+//Создание конечной точки для популярного в женском 
 app.get('/popularinwomen',async (req,res)=>{
     let products = await Product.find({category:"women"});
     let popular_in_women = products.slice(0,4);
-    console.log("Popular in women fetched");
+    console.log("Популярное в женском извлечено");
     res.send(popular_in_women);
 })
 
-//Creating middleware to fetch user
+//Middleware для извлечения пользователя
 const fetchUser = async (req,res,next)=>{
     const token = req.header('auth-token');
     if(!token){
-        res.status(401).send({errors:"Please, authorized"});
+        res.status(401).send({errors:"Пожалуйста, авторизуйтесь"});
     }
     else{
         try {
@@ -225,31 +223,31 @@ const fetchUser = async (req,res,next)=>{
             req.user = data.user;
             next();
         } catch (error) {
-            res.status(401).send({errors:"Please, authorized"});
+            res.status(401).send({errors:"Пожалуйста, авторизуйтесь"});
         }
     }
 }
 
-//Creating endpoint for adding in cart data
+//Создание конечной точки для добавления продукта в корзину
 app.post('/addtocart',fetchUser,async (req,res)=>{
-    console.log("added",req.body.itemId);
+    console.log("Добавлено",req.body.itemId);
     let userData = await Users.findOne({_id:req.user.id});
     userData.cartData[req.body.itemId]+=1;
     await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Added");
+    res.send("Добавлено");
 })
 
-//Creating endpoint to remove product from cartdata
+//Создание конечной точки для удаления товара из корзины
 app.post('/removefromcart',fetchUser,async (req,res)=>{
-    console.log("removed",req.body.itemId);
+    console.log("Удалено",req.body.itemId);
     let userData = await Users.findOne({_id:req.user.id});
     if(userData.cartData[req.body.itemId]>0)
     userData.cartData[req.body.itemId]-=1;
     await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Removed");
+    res.send("Удалено");
 })
 
-//Creating endpoint to get cartdata
+//Создание конечной точки для получения продуктов в корзине
 app.post('/getcart',fetchUser, async (req,res)=>{
     console.log("GetCart");
     let userData = await Users.findOne({_id:req.user.id});
@@ -258,9 +256,9 @@ app.post('/getcart',fetchUser, async (req,res)=>{
 
 app.listen(port,(error)=>{
     if(!error){
-        console.log("Server running on port " + port)
+        console.log("Сервер запущен на порту " + port)
     }
     else{
-        console.log("Error: " + error)
+        console.log("Ошибка: " + error)
     }
 })

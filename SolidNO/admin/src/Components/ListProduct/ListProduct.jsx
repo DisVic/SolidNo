@@ -29,14 +29,14 @@ const ListProduct = () => {
 
   return (
     <div className='list-product'>
-      <h1>All products list</h1>
+      <h1>Список всех товаров</h1>
       <div className="listproduct-format-main">
-        <p>Products</p>
-        <p>Title</p>
-        <p>Old price</p>
-        <p>New price</p>
-        <p>Category</p>
-        <p>Remove</p>
+        <p>Товраы</p>
+        <p>Наименование</p>
+        <p>Цена до скидки</p>
+        <p>Новая цена</p>
+        <p>Категория</p>
+        <p>Удалить</p>
       </div>
       <div className="listproduct_allproducts">
         <hr />
