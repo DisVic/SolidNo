@@ -16,7 +16,7 @@ const changeHandler = (e)=>{
 }
 
   const login = async () =>{
-    console.log("Login Function Executed",formData);
+    console.log("Функция входа включена",formData);
     let responseData;
     await fetch('http://localhost:4000/login',{
       method:'POST',
@@ -36,7 +36,7 @@ const changeHandler = (e)=>{
     }
   }
   const signup = async () =>{
-    console.log("Sign Up Function Executed",formData);
+    console.log("Функция регистрации включена",formData);
     let responseData;
     await fetch('http://localhost:4000/signup',{
       method:'POST',
@@ -61,17 +61,17 @@ const changeHandler = (e)=>{
       <div className="loginsignup-container">
         <h1>{state}</h1>
         <div className='loginsignup-fields'>
-          {state==="Sign Up"?<input name='username' value={formData.username} onChange={changeHandler} type="text" placeholder='Your Name'/>:<></>}
-          <input name='email' value={formData.email} onChange={changeHandler} type="email" placeholder='Email'/>
-          <input name='password' value={formData.password} onChange={changeHandler} type="password" placeholder='Password'/>
+          {state==="Sign Up"?<input name='username' value={formData.username} onChange={changeHandler} type="text" placeholder='Имя'/>:<></>}
+          <input name='email' value={formData.email} onChange={changeHandler} type="email" placeholder='Электронная почта'/>
+          <input name='password' value={formData.password} onChange={changeHandler} type="password" placeholder='Пароль'/>
         </div>
-        <button onClick={()=>{state==="Login"?login():signup()}}>Continue</button>
+        <button onClick={()=>{state==="Login"?login():signup()}}>Продолжить</button>
         {state==="Sign Up"
-        ?<p className="loginsignup-login">Alredy have an account? <span onClick={()=>{setState("Login")}}> Login Here</span></p>
-        :<p className="loginsignup-login">Haven't an account? <span onClick={()=>{setState("Sign Up")}}>Sign Up here</span></p>}
+        ?<p className="loginsignup-login">У вас уже есть аккаунт? <span onClick={()=>{setState("Login")}}>Войти</span></p>
+        :<p className="loginsignup-login">Нет аккаунта? <span onClick={()=>{setState("Sign Up")}}>Регистрация</span></p>}
         <div className="loginsignup-agree">
           <input type="checkbox" name='' id=''/>
-          <p>By continuing, I agree to the terms of use & privace policy.</p>
+          <p>Вы соглашаетесь с политикой сервиса и его правилами.</p>
         </div>
       </div>
     </div>

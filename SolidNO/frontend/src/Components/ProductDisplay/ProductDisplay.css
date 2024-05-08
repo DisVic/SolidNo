@@ -63,12 +63,17 @@
 }
 .productdisplay-right-sizes div{
     padding: 18px 24px;
-    background: #fbfbfb;
-    border: 1px solid #ebebeb;
     border-radius: 3px;
     cursor: pointer;
 }
-.productdisplay-right button{
+.unselected-size{
+    border:3px solid #ebebeb9c;
+}
+.selected-size{
+    border: 3px solid black;
+    background:  #cdcdcd63;
+}
+.add-button{
     padding: 20px 40px;
     width: 200px;
     font-size: 16px;

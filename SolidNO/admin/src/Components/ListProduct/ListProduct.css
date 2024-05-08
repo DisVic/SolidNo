@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 80%;
     height: 740px;
     padding: 10px 50px;
     margin: 30px;
@@ -20,6 +20,7 @@
     font-weight: 600;
 }
 .listproduct-format{
+    width: 1700px;
     align-items: center;
     font-weight: 500;
 }

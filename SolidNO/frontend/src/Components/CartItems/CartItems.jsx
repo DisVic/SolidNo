@@ -8,12 +8,12 @@ export const CartItems = () => {
   return (
     <div className='cartitems'>
         <div className="cartitems-format-main">
-            <p>Products</p>
-            <p>Title</p>
-            <p>Price</p>
-            <p>Quantity</p>
-            <p>Total</p>
-            <p>Remove</p>
+            <p>Товары</p>
+            <p>Наименование</p>
+            <p>Цена</p>
+            <p>Кол-во</p>
+            <p>Общая стоимость</p>
+            <p>Удалить</p>
         </div>
         <hr />
         {all_product.map((e)=>{
@@ -34,30 +34,30 @@ export const CartItems = () => {
         })}
         <div className="cartitems-down">
             <div className="cartitems-total">
-                <h1>Cart totals</h1>
+                <h1>Стоимость заказа</h1>
                 <div>
                     <div className="cartitems-total-item">
-                        <p>Subtotal</p>
+                        <p>Промежуточная стоимость</p>
                         <p>${getTotalCartAmount()}</p>
                     </div>
                     <hr />
                    <div className="cartitems-total-item">
-                    <p>Shipping Fee</p>
-                    <p>Free</p>
+                    <p>Доставка</p>
+                    <p>Бесплатно</p>
                     </div> 
                     <hr />
                     <div className="cartitems-total-item">
-                        <h3>Total</h3>
+                        <h3>Итоговый счёт</h3>
                         <h3>${getTotalCartAmount()}</h3>
                     </div>
                 </div>
-                <button>Proceed to checkout</button>
+                <button onClick={()=>alert("Переход на страницу оплаты")}>Перейти к оплате</button>
             </div>
             <div className="cartitems-promocode">
-                <p>If you have a promo, enter it here!</p>
+                <p>Если у вас есть промокод, введите его здесь!</p>
                 <div className="cartitems-promobox">
-                    <input type="text" placeholder='promo code' />
-                    <button>Submit</button>
+                    <input type="text" placeholder='Промо' />
+                    <button onClick={()=>alert("Промокод активирован!")}>Подтвердить</button>
                 </div>
             </div>
         </div>

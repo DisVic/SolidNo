@@ -47,7 +47,7 @@ const AddProduct = () => {
         },
         body:JSON.stringify(product),
       }).then((resp)=>resp.json()).then((data)=>{
-        data.success?alert("Product added!"):alert("Fail")
+        data.success?alert("Товар добавлен!"):alert("Неудача")
       })
     }
   }
@@ -55,21 +55,21 @@ const AddProduct = () => {
   return (
     <div className='add-product'>
       <div className="addproduct-itemfield">
-        <p>Product title</p>
-        <input value={productDetails.name} onChange={changeHandler} type="text" name='name' placeholder='Type here' />
+        <p>Наименование товара</p>
+        <input value={productDetails.name} onChange={changeHandler} type="text" name='name' placeholder='Поле для ввода' />
       </div>
       <div className="addproduct-price">
         <div className="addproduct-itemfield">
-          <p>Price</p>
-          <input value={productDetails.old_price} onChange={changeHandler} type="text" name="old_price" placeholder='Type here' />
+          <p>Цена</p>
+          <input value={productDetails.old_price} onChange={changeHandler} type="text" name="old_price" placeholder='Поле для ввода' />
         </div>
         <div className="addproduct-itemfield">
-          <p>Offer price</p>
-          <input value={productDetails.new_price} onChange={changeHandler} type="text" name="new_price" placeholder='Type here' />
+          <p>Цена для продажи</p>
+          <input value={productDetails.new_price} onChange={changeHandler} type="text" name="new_price" placeholder='Поле для ввода' />
         </div>
       </div>
       <div className="addproduct-itemfield">
-        <p>Product category</p>
+        <p>Категория товара</p>
         <select value={productDetails.category} onChange={changeHandler} name="category" className='addproduct-selector'>
           <option value="women">Women</option>
           <option value="men">Men</option>
@@ -82,7 +82,7 @@ const AddProduct = () => {
         </label>
         <input onChange={imageHandler} type="file" name='image' id='file-input' hidden/>
       </div>
-      <button onClick={()=>{Add_Product()}} className='addproduct-btn'>Add</button>
+      <button onClick={()=>{Add_Product()}} className='addproduct-btn'>Добавить</button>
     </div>
   )
 }
