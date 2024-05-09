@@ -34,9 +34,9 @@ return (
       </ul>
       <div className="nav-login-cart">
         {localStorage.getItem('auth-token')
-        ?<button onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Выйти</button>
-        :<Link to='/login'><button>Вход</button></Link>}
-        <Link to='/cart'><img src={cart_icon} alt=""/></Link>
+        ?<button className='login' onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Выйти</button>
+        :<Link to='/login'><button className='login'>Вход</button></Link>}
+        <Link to='/cart'><img className='cart' src={cart_icon} alt=""/></Link>
         <div className="nav-cart-count">{getTotalCartItems()}</div>
       </div>
     </div>

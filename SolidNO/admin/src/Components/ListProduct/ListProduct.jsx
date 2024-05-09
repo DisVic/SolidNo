@@ -31,7 +31,7 @@ const ListProduct = () => {
     <div className='list-product'>
       <h1>Список всех товаров</h1>
       <div className="listproduct-format-main">
-        <p>Товраы</p>
+        <p>Товары</p>
         <p>Наименование</p>
         <p>Цена до скидки</p>
         <p>Новая цена</p>

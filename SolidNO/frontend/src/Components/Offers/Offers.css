@@ -35,6 +35,14 @@
     margin-top: 30px;
     cursor:pointer;
 }
+.offers-left button:hover{
+    background: #ce3434;
+    color: #eaeaea;
+}
+.offers-left button:active{
+    background: #ce3434bc;
+    color: #eaeaeab9;
+}
 .offers-right{
     flex:1;
     display: flex;

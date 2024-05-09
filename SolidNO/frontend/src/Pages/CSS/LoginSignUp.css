@@ -40,6 +40,14 @@
     font-weight: 500;
     cursor: pointer;
 }
+.loginsignup-container button:hover{
+    background: #ce3434;
+    color: #eaeaea;
+}
+.loginsignup-container button:active{
+    background: #ce3434bc;
+    color: #eaeaeab9;
+}
 .loginsignup-login{
     margin-top: 20px;
     color: #5c5c5c;

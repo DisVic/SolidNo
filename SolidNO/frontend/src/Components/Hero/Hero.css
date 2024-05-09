@@ -45,6 +45,14 @@
     font-size: 22px;
     font-weight: 500;
 }
+.hero-latest-button:hover{
+    background: #e44747;
+    color: #dedede;
+}
+.hero-latest-button:active{
+    background: #c23d3d;
+    color: #dededeb8;
+}
 .hero-right{
     flex:1;
     display: flex;

@@ -13,7 +13,7 @@ export const ShopCategory = (props) => {
           <p>
             <span>Показано 1-12 </span>из 36 товаров
           </p>
-          <div className="shopcategory-sort">
+          <div onClick={()=>alert("Функция сортировки")} className="shopcategory-sort">
             Сортировать <img src={dropdown_icon} alt="" />
           </div>
         </div>
@@ -26,9 +26,6 @@ export const ShopCategory = (props) => {
               return null;
             }
           })}
-        </div>
-        <div className="shopcategory-loadmore">
-          Больше товаров
         </div>
     </div>
   )

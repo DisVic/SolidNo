@@ -10,7 +10,7 @@
 .addproduct-itemfield{
     width: 100%;
     color:#7b7b7b;
-    font-size: 17px;
+    font-size: 19px;
 }
 .addproduct-itemfield input{
     box-sizing: border-box;
@@ -22,7 +22,7 @@
     outline: none;
     color: #7b7b7b;
     font-family: "Poppins";
-    font-size: 14px;
+    font-size: 18px;
 }
 .addproduct-price{
     display: flex;
@@ -32,7 +32,7 @@
     padding: 10px;
     width: 110px;
     height: 50px;
-    font-size: 14px;
+    font-size: 16px;
     color: #7b7b7b;
     border: 1px solid #7b7b7b8d;
     border-radius: 4px;

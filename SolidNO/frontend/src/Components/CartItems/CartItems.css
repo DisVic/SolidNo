@@ -55,11 +55,19 @@
     height: 58px;
     outline: none;
     border: none;
-    background: #ff5a5a;
+    background: #ff4747;
     color: #fff;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+}
+.cartitems-total button:hover{
+    background: #ff5a5a;
+    color:#dddddd
+}
+.cartitems-total button:active{
+    background: #d84c4c;
+    color: #d0d0d0;
 }
 .cartitems-promocode{
     flex:1;
@@ -88,9 +96,12 @@
     width:170px;
     height: 58px;
     font-size: 16px;
-    background: black;
+    background: rgb(0, 0, 0);
     color: white;
     cursor: pointer;
+}
+.cartitems-promobox button:hover{
+    color: rgb(210, 210, 210);
 }
 @media(max-width:1280px){
     .cartitems{
