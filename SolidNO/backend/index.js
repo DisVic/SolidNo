@@ -41,40 +41,31 @@ app.post("/upload",upload.single('product'),(req,res)=>{
 })
 
 //Сущность для продукта для БД
-
 const Product = mongoose.model("Product",{
     id:{
         type:Number,
-        required:true, 
-    },
+        required:true, },
     name:{
         type:String,
-        required:true,
-    },
+        required:true,},
     image:{
         type:String,
-        required:true,
-    },
+        required:true,},
     category:{
         type:String,
-        required:true,
-    },
+        required:true,},
     new_price:{
         type:Number,
-        required:true,
-    },
+        required:true,},
     old_price:{
         type:Number,
-        required:true,
-    },
+        required:true,},
     date:{
         type:Date,
-        default:Date.now,
-    },
+        default:Date.now,},
     available:{
         type:Boolean,
-        default:true,
-    },
+        default:true,},
 })
 app.post('/addproduct',async (req,res)=>{
     let products = await Product.find({});
@@ -124,31 +115,24 @@ app.get('/allproducts',async (req,res)=>{
 //Сущность для пользователя
 const Users = mongoose.model('Users',{
     name:{
-        type:String,
-    },
+        type:String,},
     email:{
         type:String,
-        unique:true,
-    },
+        unique:true,},
     password:{
-        type:String,
-    },
+        type:String,},
     cartData:{
-        type:Object,
-    },
+        type:Object,},
     date:{
         type:Date,
-        default:Date.now,
-    }
+        default:Date.now,}
 })
 
 //Создание конечной точки для регистрации пользователя
 app.post('/signup', async (req,res)=>{
-
     let check = await Users.findOne({email:req.body.email});
-    if(check){
+    if(check)
         return res.status(400).json({success:false,errors:"Пользователь с таким email уже существует"})
-    }
     let cart = {};
     for (let index = 0; index < 300; index++) {
         cart[index]=0;
@@ -159,15 +143,8 @@ app.post('/signup', async (req,res)=>{
         password:req.body.password,
         cartData:cart,
     })
-
     await user.save();
-
-    const data = {
-        user:{
-            id:user.id
-        }
-    }
-
+    const data = {user:{id:user.id}}
     const token = jwt.sign(data,'secret_ecom');
     res.json({success:true,token})
 })
@@ -179,17 +156,13 @@ app.post('/login',async (req,res)=>{
         const passCompare = req.body.password === user.password;
         if(passCompare){
             const data = {
-                user:{
-                    id:user.id
-                }
-            }
+                user:{id:user.id}}
             const token = jwt.sign(data,'secret_ecom');
             res.json({success:true,token});
         }
         else{
             res.json({success:false,errors:"Неверный пароль!"});
-        }
-    }
+        }}
     else{
         res.json({success:false,errors:"Неверный email!"})
     }
